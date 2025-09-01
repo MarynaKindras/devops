@@ -1,6 +1,6 @@
 # DevOps CI/CD
 
-# Вивчення Helm — Lesson 7
+# Вивчення Helm — Lesson 6-7
 
 ## Опис проєкту
 
