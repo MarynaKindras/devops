@@ -19,14 +19,6 @@
 ├── .gitignore
 ├── .prettierrc
 ├── README.md
-├── assets/
-│   ├── screen_01.png
-│   ├── screen_02.png
-│   ├── screen_03.png
-│   ├── screen_04.png
-│   ├── screen_05.png
-│   ├── screen_06.png
-│   └── screen_07.png
 ├── backend.tf               # Налаштування віддаленого бекенду (S3 + DynamoDB)
 ├── main.tf                  # Головний файл для підключення модулів
 ├── outputs.tf               # Загальні вихідні дані по інфраструктурі
@@ -144,6 +136,3 @@ terraform init -migrate-state
 
 ---
 
-## Регіон розгортання
-
-US East (N. Virginia) `us-east-1`.
