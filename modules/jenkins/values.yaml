@@ -1,4 +1,5 @@
 controller:
+
   # Jenkins Controller Configuration
   image: "jenkins/jenkins"
   tag: "2.426.1-lts"
@@ -12,6 +13,7 @@ controller:
       cpu: "2000m"
       memory: "4Gi"
 
+
   # Service configuration
   serviceType: LoadBalancer
   servicePort: 8080
@@ -23,12 +25,14 @@ controller:
       welcome-message: |
         jenkins:
           systemMessage: "Jenkins for CI/CD Pipeline"
+
         
   # Security
   admin:
     existingSecret: ""
     userKey: jenkins-admin-user
     passwordKey: jenkins-admin-password
+
 
   # Plugins to install
   installPlugins:
@@ -43,12 +47,14 @@ controller:
     - pipeline-github-lib:38.v445716ea_edda_
     - aws-credentials:191.vcb_f183ce58b_9
 
+
   # Additional environment variables
   additionalExistingSecrets:
     - name: aws-credentials
       keyName: aws-access-key-id
     - name: aws-credentials
       keyName: aws-secret-access-key
+
 
 # Agent configuration
 agent:
@@ -95,6 +101,7 @@ securityContext:
 serviceAccount:
   create: false
   name: jenkins-admin
+
 
 # RBAC
 rbac:

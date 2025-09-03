@@ -1,6 +1,6 @@
 # DevOps CI/CD
 
-**CI/CD Platform з Jenkins + Argo CD + Terraform**
+**CI/CD Platform з Jenkins + Argo CD + Terraform + RDS**
 
 ## Опис проєкту
 
@@ -19,7 +19,10 @@
 ## Структура проєкту
 
 ```
-devops-ci-cd/
+
+devops/
+
+
 │
 ├── main.tf                  # Головний файл для підключення модулів
 ├── backend.tf               # Налаштування бекенду для стейтів

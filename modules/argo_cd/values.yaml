@@ -27,7 +27,7 @@ controller:
     enabled: true
     service:
       type: ClusterIP
-      
+
 # Repository Server Configuration
 repoServer:
   metrics:
@@ -53,6 +53,7 @@ global:
     repository: quay.io/argoproj/argocd
     tag: v2.8.4
     
+
 # RBAC Configuration
 configs:
   rbac:
@@ -68,6 +69,7 @@ configs:
   secret:
     createSecret: true
     
+
 # TLS Configuration (disabled for simplicity)
 configs:
   tls:

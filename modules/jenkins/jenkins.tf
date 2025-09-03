@@ -1,3 +1,4 @@
+
 # Kubernetes 
 resource "kubernetes_namespace" "jenkins" {
   metadata {
