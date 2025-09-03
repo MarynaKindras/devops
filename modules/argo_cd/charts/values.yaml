@@ -1,0 +1,28 @@
+gitRepoUrl: "https://github.com/MarynaKindras/devops.git"
+targetRevision: "devops"
+djangoAppNamespace: "django-app"
+
+applications:
+  - name: django-app
+    namespace: argocd
+    project: default
+    source:
+      repoURL: "{{ .Values.gitRepoUrl }}"
+      targetRevision: "{{ .Values.targetRevision }}"
+      path: "charts/django-app"
+    destination:
+      server: https://kubernetes.default.svc
+      namespace: "{{ .Values.djangoAppNamespace }}"
+    syncPolicy:
+      automated:
+        prune: true
+        selfHeal: true
+      syncOptions:
+        - CreateNamespace=true
+        - PrunePropagationPolicy=foreground
+        - PruneLast=true
+
+repositories:
+  - url: "{{ .Values.gitRepoUrl }}"
+    type: git
+    name: django-app-repo

@@ -31,33 +31,55 @@ output "eks_cluster_arn" {
 output "kubectl_config_command" {
   description = "Command to configure kubectl"
   value       = "aws eks update-kubeconfig --region us-east-1 --name ${module.eks.cluster_name}"
-=======
-output "s3_bucket_arn" {
-  description = "S3 bucket ARN"
-  value       = module.s3_backend.bucket_arn
 }
 
-output "dynamodb_table_name" {
-  description = "DynamoDB table name for state locking"
-  value       = module.s3_backend.table_name
+output "jenkins_url" {
+  description = "Jenkins LoadBalancer URL"
+  value       = module.jenkins.jenkins_url
 }
 
-output "vpc_id" {
-  description = "VPC ID"
-  value       = module.vpc.vpc_id
+output "jenkins_admin_user" {
+  description = "Jenkins admin username"
+  value       = module.jenkins.jenkins_admin_user
 }
 
-output "public_subnet_ids" {
-  description = "Public subnet IDs"
-  value       = module.vpc.public_subnet_ids
+output "jenkins_admin_password" {
+  description = "Jenkins admin password"
+  value       = module.jenkins.jenkins_admin_password
+  sensitive   = true
 }
 
-output "private_subnet_ids" {
-  description = "Private subnet IDs"
-  value       = module.vpc.private_subnet_ids
+
+output "argocd_server_url" {
+  description = "Argo CD Server URL"
+  value       = module.argo_cd.argocd_server_url
 }
 
-output "ecr_repository_url" {
-  description = "ECR repository URL"
-  value       = module.ecr.repository_url
+output "argocd_admin_password" {
+  description = "Argo CD admin password"
+  value       = module.argo_cd.argocd_admin_password
+  sensitive   = true
+}
+
+output "deployment_instructions" {
+  description = "Instructions for accessing services"
+  value = <<EOF
+
+CI/CD Infrastructure deployed successfully!
+
+   Jenkins: ${module.jenkins.jenkins_url}
+   Username: ${module.jenkins.jenkins_admin_user}
+   Password: Use 'terraform output jenkins_admin_password' to get password
+
+   Argo CD: ${module.argo_cd.argocd_server_url}
+   Username: admin
+   Password: Use 'terraform output argocd_admin_password' to get password
+
+Next steps:
+1. Access Jenkins and configure AWS credentials
+2. Create a pipeline job using the Jenkinsfile
+3. Access Argo CD to monitor deployments
+4. Push changes to trigger the CI/CD pipeline
+
+EOF
 }

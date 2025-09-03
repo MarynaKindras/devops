@@ -1,0 +1,61 @@
+server:
+  service:
+    type: LoadBalancer
+    
+  config:
+    application.instanceLabelKey: argocd.argoproj.io/instance
+    server.rbac.log.enforce.enable: false
+    exec.enabled: true
+    admin.enabled: true
+    timeout.reconciliation: 180s
+    
+  extraArgs:
+    - --insecure
+    
+  metrics:
+    enabled: true
+    service:
+      type: ClusterIP
+
+controller:
+  metrics:
+    enabled: true
+    service:
+      type: ClusterIP
+      
+repoServer:
+  metrics:
+    enabled: true
+    service:
+      type: ClusterIP
+
+redis:
+  enabled: true
+  
+notifications:
+  enabled: true
+
+applicationSet:
+  enabled: true
+
+global:
+  image:
+    repository: quay.io/argoproj/argocd
+    tag: v2.8.4
+    
+configs:
+  rbac:
+    policy.default: role:readonly
+    policy.csv: |
+      p, role:admin, applications, *, */*, allow
+      p, role:admin, clusters, *, *, allow
+      p, role:admin, repositories, *, *, allow
+      g, argocd-admins, role:admin
+
+configs:
+  secret:
+    createSecret: true
+    
+configs:
+  tls:
+    certificates: {}
