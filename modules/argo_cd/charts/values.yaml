@@ -1,7 +1,11 @@
+
+# Default values for Argo CD Applications
 gitRepoUrl: "https://github.com/MarynaKindras/devops.git"
 targetRevision: "devops"
 djangoAppNamespace: "django-app"
 
+
+# Applications to create
 applications:
   - name: django-app
     namespace: argocd
@@ -22,6 +26,8 @@ applications:
         - PrunePropagationPolicy=foreground
         - PruneLast=true
 
+
+# Git repositories to configure
 repositories:
   - url: "{{ .Values.gitRepoUrl }}"
     type: git

@@ -13,10 +13,12 @@ terraform {
       source  = "hashicorp/helm"
       version = "~> 2.12"
     }
+
     random = {
       source  = "hashicorp/random"
       version = "~> 3.1"
     }
+
   }
 }
 
@@ -161,6 +163,7 @@ module "rds_postgres" {
     Purpose     = "django-database"
   }
 }
+
 
 module "jenkins" {
   source = "./modules/jenkins"
