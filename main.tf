@@ -13,12 +13,10 @@ terraform {
       source  = "hashicorp/helm"
       version = "~> 2.12"
     }
-
     random = {
       source  = "hashicorp/random"
       version = "~> 3.1"
     }
-
   }
 }
 
@@ -164,7 +162,6 @@ module "rds_postgres" {
   }
 }
 
-
 module "jenkins" {
   source = "./modules/jenkins"
   
@@ -179,4 +176,19 @@ module "argo_cd" {
   cluster_name     = module.eks.cluster_name
   cluster_endpoint = module.eks.cluster_endpoint
   namespace        = "argocd"
+}
+
+module "monitoring" {
+  source = "./modules/monitoring"
+  
+  cluster_name     = module.eks.cluster_name
+  cluster_endpoint = module.eks.cluster_endpoint
+  namespace        = "monitoring"
+  
+  prometheus_storage_size = "20Gi"
+  grafana_storage_size    = "5Gi"
+  
+  grafana_admin_password = "Admin12345!!"
+  
+  depends_on = [module.eks]
 }
